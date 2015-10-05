@@ -22,6 +22,20 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+//configuração rotas de navegação
+var bookRouter = express.Router();
+
+bookRouter.route('/Books')
+	.get(function(req, res) {
+		var responseJson = { hello: "This is my API" };
+		
+		//em vez de res.send, res.json
+		res.json(responseJson);
+	});
+
+app.use('/api', bookRouter);
+
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
